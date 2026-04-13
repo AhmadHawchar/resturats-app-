@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "223469946880",
+    "project_id": "apptestshop-d75aa",
+    "storage_bucket": "apptestshop-d75aa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223469946880:android:5770e23b39d36f787870e5",
+        "android_client_info": {
+          "package_name": "com.example.apptest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjJO0DkylQJa72ex4YDQ4wiIeO1kw6AA8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

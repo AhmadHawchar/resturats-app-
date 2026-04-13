@@ -1,0 +1,2 @@
+C:/Users/ahmad/Downloads/foodapp-ahmadhawshar/foodapp-master/android/app/.cxx/Debug/1p3j4o32/x86/CMakeFiles/edit_cache.dir
+C:/Users/ahmad/Downloads/foodapp-ahmadhawshar/foodapp-master/android/app/.cxx/Debug/1p3j4o32/x86/CMakeFiles/rebuild_cache.dir
