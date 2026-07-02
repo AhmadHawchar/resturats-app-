@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -11,7 +12,8 @@ class OwnerHomePage extends StatefulWidget {
 }
 
 class _OwnerHomePageState extends State<OwnerHomePage> {
-  final String ownerId = "eY3B3EvHvxa1BcKLwEZ79BPDQVG2";
+  // The signed-in owner's uid; empty if somehow not authenticated.
+  final String ownerId = FirebaseAuth.instance.currentUser?.uid ?? '';
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Color Palette

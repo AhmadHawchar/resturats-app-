@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class FoodInfoPage extends StatefulWidget {
   final Map<String, dynamic> foodItem;
@@ -231,9 +232,10 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
       // Submit order to user's orders subcollection
       await userOrderRef.set(orderData);
 
-      // Update owner's profit using current user's UID
-      DocumentReference ownerRef =
-          _firestore.collection('owners').doc("eY3B3EvHvxa1BcKLwEZ79BPDQVG2");
+      // Credit the platform owner's commission (fixed account from .env)
+      DocumentReference ownerRef = _firestore
+          .collection('owners')
+          .doc(dotenv.env['PLATFORM_OWNER_ID']!);
 
       await _firestore.runTransaction((transaction) async {
         DocumentSnapshot ownerSnapshot = await transaction.get(ownerRef);
