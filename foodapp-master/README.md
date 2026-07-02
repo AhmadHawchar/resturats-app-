@@ -1,16 +1,15 @@
-# apptest
+# FoodApp (Flutter project)
 
-A new Flutter project.
+This folder contains the Flutter source for **FoodApp — Multi-Role Food Ordering App**.
 
-## Getting Started
+👉 See the [main README](../README.md) for features, tech stack, and full setup instructions.
 
-This project is a starting point for a Flutter application.
+## Quick start
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+flutter pub get
+cp .env.example .env   # then fill in your Firebase + ImgBB values
+flutter run
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Secrets are loaded from a gitignored `.env` file — see [`.env.example`](.env.example) for the required keys.
