@@ -153,6 +153,7 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
   Future<void> _logout() async {
     try {
       await _auth.signOut();
+      if (!mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => const AskUserPage()),
       );
@@ -174,6 +175,7 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
         'closingTime': closingTimeStr,
       });
       await _fetchRestaurantData();
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -466,6 +468,7 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
         field: value,
       });
       await _fetchRestaurantData();
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -625,6 +628,7 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
         final imageUrl = await uploadImageToImgBB(imageNotifier.value!);
 
         if (imageUrl == null) {
+          if (!mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Image upload failed')),
           );
@@ -673,10 +677,12 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
         categoryNotifier.value = null;
         offerDateNotifier.value = null;
 
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Menu item saved successfully')),
         );
       } catch (e) {
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error saving menu item: $e')),
         );
@@ -954,6 +960,7 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
           .delete();
 
       // Show success snackbar
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -965,6 +972,7 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
       );
     } catch (e) {
       // Show error snackbar
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

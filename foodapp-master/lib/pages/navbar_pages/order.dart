@@ -54,6 +54,7 @@ class _OrderPageState extends State<OrderPage> {
           .doc(restaurantOrderId)
           .delete();
 
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Order cancelled successfully'),
@@ -61,6 +62,7 @@ class _OrderPageState extends State<OrderPage> {
         ),
       );
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error cancelling order: $e'),
@@ -118,6 +120,7 @@ class _OrderPageState extends State<OrderPage> {
       }
     } catch (e) {
       debugPrint('Error updating order: $e'); // More detailed error logging
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error updating order: ${e.toString()}'),

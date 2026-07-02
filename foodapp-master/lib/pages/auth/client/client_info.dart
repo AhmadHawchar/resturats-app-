@@ -129,6 +129,7 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
         });
 
         // Show success message
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Profile picture uploaded successfully'),
@@ -141,6 +142,7 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
       }
     } catch (e) {
       // Handle any errors
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error uploading image: $e'),
@@ -193,6 +195,7 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
         });
 
         // Navigate to next page or show success
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Profile Updated Successfully')),
         );
@@ -204,6 +207,7 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
       }
     } catch (e) {
       // Handle any errors
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error updating profile: ${e.toString()}')),
       );
@@ -464,6 +468,7 @@ class _LocationPickerPageState extends State<LocationPickerPage> {
         _searchSuggestions.clear();
       }
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
             content: Text('Could not find the location. Please try again.')),

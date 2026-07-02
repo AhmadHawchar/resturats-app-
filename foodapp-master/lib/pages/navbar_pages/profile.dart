@@ -95,6 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     // Refresh user data
                     await _fetchUserData();
 
+                    if (!context.mounted) return;
                     Navigator.of(context).pop();
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
@@ -103,6 +104,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     );
                   } catch (e) {
+                    if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Error updating payment method: $e'),
@@ -183,10 +185,12 @@ class _ProfilePageState extends State<ProfilePage> {
   void _signOut() async {
     try {
       await _auth.signOut();
+      if (!mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => AskUserPage()),
       );
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error signing out: $e'),
