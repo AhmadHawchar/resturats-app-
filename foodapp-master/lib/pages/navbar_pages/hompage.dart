@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
 
       return 'Invalid Date';
     } catch (e) {
-      print('Error formatting date: $e');
+      debugPrint('Error formatting date: $e');
       return 'No Expiry';
     }
   }

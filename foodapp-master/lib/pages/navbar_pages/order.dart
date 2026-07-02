@@ -117,7 +117,7 @@ class _OrderPageState extends State<OrderPage> {
             .update(restaurantOrderUpdate);
       }
     } catch (e) {
-      print('Error updating order: $e'); // More detailed error logging
+      debugPrint('Error updating order: $e'); // More detailed error logging
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error updating order: ${e.toString()}'),

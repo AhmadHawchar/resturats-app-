@@ -101,7 +101,7 @@ class _HomeScreenState extends State<NavbarScreen> {
           });
         }
       } catch (e) {
-        print('Error fetching user data: $e');
+        debugPrint('Error fetching user data: $e');
         // Fallback to default values
         setState(() {
           _activeIcons = ['home', 'restaurant', 'shopping_cart', 'person'];

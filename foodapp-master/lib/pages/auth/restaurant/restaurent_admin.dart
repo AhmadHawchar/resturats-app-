@@ -102,7 +102,7 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
       }
       return TimeOfDay(hour: convertedHour, minute: minute);
     } catch (e) {
-      print('Unexpected error parsing time: $timeStr - $e');
+      debugPrint('Unexpected error parsing time: $timeStr - $e');
       return null;
     }
   }
@@ -126,7 +126,7 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
       return currentMinutes >= openingMinutes &&
           currentMinutes <= closingMinutes;
     } catch (e) {
-      print('Error checking restaurant status: $e');
+      debugPrint('Error checking restaurant status: $e');
       return false;
     }
   }
@@ -592,19 +592,19 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
           final imageUrl = jsonResponse['data']['url'];
 
           if (kDebugMode) {
-            print('Image uploaded successfully: $imageUrl');
+            debugPrint('Image uploaded successfully: $imageUrl');
           }
 
           return imageUrl;
         } else {
           if (kDebugMode) {
-            print('Image upload failed: ${response.body}');
+            debugPrint('Image upload failed: ${response.body}');
           }
           return null;
         }
       } catch (e) {
         if (kDebugMode) {
-          print('Error uploading image: $e');
+          debugPrint('Error uploading image: $e');
         }
         return null;
       }

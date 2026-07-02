@@ -40,24 +40,24 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
   }
 
   Future<void> _fetchRestaurantDetails() async {
-    print('Fetching restaurant details');
-    print('Current Restaurant ID: ${widget.restaurantId}');
+    debugPrint('Fetching restaurant details');
+    debugPrint('Current Restaurant ID: ${widget.restaurantId}');
 
     try {
       if (widget.restaurantId.isEmpty) {
-        print('❌ ERROR: Restaurant ID is empty');
-        print('Full widget details: ${widget.toString()}');
+        debugPrint('❌ ERROR: Restaurant ID is empty');
+        debugPrint('Full widget details: ${widget.toString()}');
         _showErrorSnackBar('Invalid restaurant information');
         return;
       }
 
-      print('Attempting to fetch restaurant document');
+      debugPrint('Attempting to fetch restaurant document');
       final QuerySnapshot restaurantQuery =
           await _firestore.collection('restaurants').get();
 
-      print('Total restaurants found: ${restaurantQuery.docs.length}');
+      debugPrint('Total restaurants found: ${restaurantQuery.docs.length}');
       for (var doc in restaurantQuery.docs) {
-        print('Found Restaurant ID: ${doc.id}');
+        debugPrint('Found Restaurant ID: ${doc.id}');
       }
 
       final restaurantDoc = await _firestore
@@ -65,33 +65,33 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
           .doc(widget.restaurantId)
           .get();
 
-      print('Restaurant Document Fetch Attempt:');
-      print('Document exists: ${restaurantDoc.exists}');
+      debugPrint('Restaurant Document Fetch Attempt:');
+      debugPrint('Document exists: ${restaurantDoc.exists}');
 
       if (!restaurantDoc.exists) {
-        print('❌ ERROR: Restaurant document does not exist');
-        print('Attempted ID: ${widget.restaurantId}');
+        debugPrint('❌ ERROR: Restaurant document does not exist');
+        debugPrint('Attempted ID: ${widget.restaurantId}');
         _showErrorSnackBar('Restaurant not found');
         return;
       }
 
       final data = restaurantDoc.data();
       if (data == null) {
-        print('❌ ERROR: Restaurant document data is null');
+        debugPrint('❌ ERROR: Restaurant document data is null');
         _showErrorSnackBar('Unable to fetch restaurant details');
         return;
       }
 
-      print('Restaurant Data: $data');
+      debugPrint('Restaurant Data: $data');
 
       setState(() {
         _whatsappNumber = data['whatsappNumber'];
-        print('WhatsApp Number: $_whatsappNumber');
+        debugPrint('WhatsApp Number: $_whatsappNumber');
       });
     } catch (e, stackTrace) {
-      print('❌ CRITICAL ERROR in _fetchRestaurantDetails');
-      print('Error: $e');
-      print('Stack Trace: $stackTrace');
+      debugPrint('❌ CRITICAL ERROR in _fetchRestaurantDetails');
+      debugPrint('Error: $e');
+      debugPrint('Stack Trace: $stackTrace');
       _showErrorSnackBar('Could not fetch restaurant details');
     }
   }
@@ -115,7 +115,7 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
         });
       }
     } catch (e) {
-      print('Error fetching menu item details: $e');
+      debugPrint('Error fetching menu item details: $e');
     }
   }
 
@@ -268,8 +268,8 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
       // Show success message
       _showSuccessSnackBar('Order placed successfully! 5% commission applied.');
     } catch (e, stackTrace) {
-      print('Unexpected error in order submission: $e');
-      print('Stack trace: $stackTrace');
+      debugPrint('Unexpected error in order submission: $e');
+      debugPrint('Stack trace: $stackTrace');
       _showErrorSnackBar('An unexpected error occurred');
     }
   }
@@ -664,8 +664,8 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
     try {
       await launchUrl(whatsappUrl);
     } catch (e, stackTrace) {
-      print('Could not launch WhatsApp: $e');
-      print('Stack trace: $stackTrace');
+      debugPrint('Could not launch WhatsApp: $e');
+      debugPrint('Stack trace: $stackTrace');
       _showErrorSnackBar('Could not launch WhatsApp');
     }
   }

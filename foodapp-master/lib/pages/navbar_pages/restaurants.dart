@@ -33,7 +33,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
         _filteredRestaurants = _allRestaurants;
       });
     } catch (e) {
-      print('Error fetching restaurants: $e');
+      debugPrint('Error fetching restaurants: $e');
     }
   }
 

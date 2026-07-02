@@ -37,7 +37,7 @@ class _RestaurantInfoPageState extends State<RestaurantInfoPage>
         _restaurantData = docSnapshot.data();
       });
     } catch (e) {
-      print('Error fetching restaurant details: $e');
+      debugPrint('Error fetching restaurant details: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to load restaurant details')),
       );

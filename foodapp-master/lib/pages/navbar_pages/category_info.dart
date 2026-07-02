@@ -28,7 +28,7 @@ class _CategoryInfoPageState extends State<CategoryInfoPage> {
     try {
       // Normalize category name to match Firestore data
       String normalizedCategory = widget.categoryName;
-      print("Searching for category: $normalizedCategory");
+      debugPrint("Searching for category: $normalizedCategory");
 
       // Fetch all restaurants first
       final restaurantsSnapshot =
@@ -49,11 +49,11 @@ class _CategoryInfoPageState extends State<CategoryInfoPage> {
       setState(() {
         _categoryItems = allCategoryItems;
         _isLoading = false;
-        print(
+        debugPrint(
             "Found ${_categoryItems.length} items in $normalizedCategory category");
       });
     } catch (e) {
-      print('Error fetching category items: $e');
+      debugPrint('Error fetching category items: $e');
       setState(() {
         _isLoading = false;
       });
