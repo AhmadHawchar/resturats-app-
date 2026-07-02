@@ -10,6 +10,7 @@ import 'package:intl/intl.dart'; // For formatting dates
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart' show kDebugMode;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class RestaurantAdminPage extends StatefulWidget {
   const RestaurantAdminPage({super.key});
@@ -586,7 +587,7 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
         final response = await http.post(
           url,
           body: {
-            'key': 'd97d7227eca3b349cbf52ad09b50bafd', // Your ImgBB API key
+            'key': dotenv.env['IMGBB_API_KEY']!, // ImgBB API key (from .env)
             'image': base64Image,
           },
         );

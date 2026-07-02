@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class RestaurantInfoPage extends StatefulWidget {
   const RestaurantInfoPage({super.key});
@@ -21,7 +22,7 @@ class _RestaurantInfoPageState extends State<RestaurantInfoPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  static const String _imgbbApiKey = 'd97d7227eca3b349cbf52ad09b50bafd';
+  final String _imgbbApiKey = dotenv.env['IMGBB_API_KEY']!;
 
   File? _imageFile;
   String? _imageUrl;

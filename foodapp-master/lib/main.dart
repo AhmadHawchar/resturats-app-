@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:apptest/pages/splash_screen.dart';
 
 void main() async {
@@ -7,14 +8,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   try {
-    // Initialize Firebase with specific configuration
+    // Load secrets from the (gitignored) .env file
+    await dotenv.load(fileName: ".env");
+
+    // Initialize Firebase using configuration from environment variables
     await Firebase.initializeApp(
       options: FirebaseOptions(
-        apiKey: "AIzaSyAjJO0DkylQJa72ex4YDQ4wiIeO1kw6AA8",
-        projectId: "apptestshop-d75aa",
-        messagingSenderId: "223469946880",
-        appId: "1:223469946880:android:5770e23b39d36f787870e5",
-        storageBucket: "apptestshop-d75aa.firebasestorage.app",
+        apiKey: dotenv.env['FIREBASE_API_KEY']!,
+        projectId: dotenv.env['FIREBASE_PROJECT_ID']!,
+        messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID']!,
+        appId: dotenv.env['FIREBASE_APP_ID']!,
+        storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET']!,
       ),
     );
 
@@ -26,7 +30,7 @@ void main() async {
       MaterialApp(
         home: Scaffold(
           body: Center(
-            child: Text('an error has occured with your firebase'),
+            child: Text('An error occurred while initializing Firebase'),
           ),
         ),
       ),

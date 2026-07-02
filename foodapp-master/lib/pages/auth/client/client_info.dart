@@ -10,6 +10,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'dart:convert';
 import 'package:geocoding/geocoding.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../../navbar.dart';
 
@@ -94,8 +95,8 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
   Future<void> _uploadImageToImgBB() async {
     if (_imageFile == null) return;
 
-    // ImgBB API key
-    const apiKey = 'd97d7227eca3b349cbf52ad09b50bafd';
+    // ImgBB API key (loaded from .env)
+    final apiKey = dotenv.env['IMGBB_API_KEY']!;
 
     try {
       // Prepare multipart request
