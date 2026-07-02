@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:apptest/pages/navbar_pages/restaurants_info_page.dart';
 
 class RestaurantPage extends StatefulWidget {
+  const RestaurantPage({super.key});
+
   @override
   _RestaurantPageState createState() => _RestaurantPageState();
 }

@@ -14,6 +14,8 @@ import 'package:geocoding/geocoding.dart';
 import '../../navbar.dart';
 
 class ClientInfoPage extends StatefulWidget {
+  const ClientInfoPage({super.key});
+
   @override
   _ClientInfoPageState createState() => _ClientInfoPageState();
 }
@@ -27,7 +29,6 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
   File? _imageFile;
   String? _profileImageUrl;
   String _selectedPaymentMethod = '';
-  bool _isUploading = false;
 
   String? _latitude;
   String? _longitude;
@@ -93,10 +94,6 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
   Future<void> _uploadImageToImgBB() async {
     if (_imageFile == null) return;
 
-    setState(() {
-      _isUploading = true;
-    });
-
     // ImgBB API key
     const apiKey = 'd97d7227eca3b349cbf52ad09b50bafd';
 
@@ -129,7 +126,6 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
 
         setState(() {
           _profileImageUrl = imageUrl;
-          _isUploading = false;
         });
 
         // Show success message
@@ -145,10 +141,6 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
       }
     } catch (e) {
       // Handle any errors
-      setState(() {
-        _isUploading = false;
-      });
-
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error uploading image: $e'),
@@ -177,10 +169,6 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
       );
       return;
     }
-
-    setState(() {
-      _isUploading = true;
-    });
 
     try {
       // Get current user
@@ -219,10 +207,6 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error updating profile: ${e.toString()}')),
       );
-    } finally {
-      setState(() {
-        _isUploading = false;
-      });
     }
   }
 
@@ -360,10 +344,10 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
                 // Save Button
                 ElevatedButton(
                   onPressed: _saveUserInfo,
-                  child: Text('Save Profile'),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 15),
                   ),
+                  child: Text('Save Profile'),
                 ),
               ],
             ),
@@ -376,6 +360,8 @@ class _ClientInfoPageState extends State<ClientInfoPage> {
 
 // Location Picker Page
 class LocationPickerPage extends StatefulWidget {
+  const LocationPickerPage({super.key});
+
   @override
   _LocationPickerPageState createState() => _LocationPickerPageState();
 }
@@ -385,7 +371,6 @@ class _LocationPickerPageState extends State<LocationPickerPage> {
   String? _selectedLocationName;
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _searchFocusNode = FocusNode();
-  bool _isLoading = false;
   List<Map<String, dynamic>> _searchSuggestions = [];
   MapController _mapController = MapController();
 
@@ -413,10 +398,6 @@ class _LocationPickerPageState extends State<LocationPickerPage> {
 
   Future<void> _fetchSearchSuggestions(String query) async {
     try {
-      setState(() {
-        _isLoading = true;
-      });
-
       // Use geocoding to get location suggestions
       List<Location> locations = await locationFromAddress(query);
 
@@ -437,10 +418,6 @@ class _LocationPickerPageState extends State<LocationPickerPage> {
       setState(() {
         _searchSuggestions.clear();
       });
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
     }
   }
 
@@ -453,10 +430,6 @@ class _LocationPickerPageState extends State<LocationPickerPage> {
     }
 
     try {
-      setState(() {
-        _isLoading = true;
-      });
-
       // Geocode the entered location
       List<Location> locations =
           await locationFromAddress(_searchController.text);
@@ -495,10 +468,6 @@ class _LocationPickerPageState extends State<LocationPickerPage> {
         SnackBar(
             content: Text('Could not find the location. Please try again.')),
       );
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
     }
   }
 

@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart' show kDebugMode;
 
 class RestaurantAdminPage extends StatefulWidget {
-  const RestaurantAdminPage({Key? key}) : super(key: key);
+  const RestaurantAdminPage({super.key});
 
   @override
   _RestaurantAdminPageState createState() => _RestaurantAdminPageState();
@@ -38,7 +38,6 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
 
   // Color palette
   final Color _primaryColor = const Color(0xFF6A1B9A);
-  final Color _accentColor = const Color(0xFFAB47BC);
   final Color _backgroundColor = const Color(0xFFF3E5F5);
 
   @override
@@ -162,25 +161,6 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
     }
   }
 
-  Future<void> _selectTime(bool isOpening) async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: isOpening
-          ? (_openingTime ?? TimeOfDay.now())
-          : (_closingTime ?? TimeOfDay.now()),
-    );
-    if (picked != null) {
-      setState(() {
-        if (isOpening) {
-          _openingTime = picked;
-        } else {
-          _closingTime = picked;
-        }
-      });
-      _updateRestaurantHours();
-    }
-  }
-
   Future<void> _updateRestaurantHours() async {
     try {
       final user = _auth.currentUser;
@@ -297,8 +277,7 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
                     onPrimary: Colors.white,
                     surface: Colors.white,
                     onSurface: _primaryColor,
-                  ),
-                  dialogBackgroundColor: Colors.white,
+                  ), dialogTheme: DialogThemeData(backgroundColor: Colors.white),
                 ),
                 child: child!,
               ),
@@ -510,8 +489,7 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
         children: [
           Expanded(
             child: Text(
-              '${_restaurantData?['restaurantName']}\'s restaurant ' ??
-                  'My Restaurant',
+              '${_restaurantData?['restaurantName']}\'s restaurant ',
               style: GoogleFonts.poppins(
                 color: Colors.white,
                 fontSize: 20,
@@ -705,7 +683,7 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
       }
     }
 
-    Widget _buildMenuItemForm(String type) {
+    Widget buildMenuItemForm(String type) {
       return SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -853,8 +831,8 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => saveMenuItem(type),
-              child: Text('Save $type Item'),
               style: ElevatedButton.styleFrom(backgroundColor: _primaryColor),
+              child: Text('Save $type Item'),
             ),
           ],
         ),
@@ -876,8 +854,8 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
         body: TabBarView(
           children: [
             // _buildMenuItemForm('Features'),
-            _buildMenuItemForm('Daily Deals'),
-            _buildMenuItemForm('Big Offers'),
+            buildMenuItemForm('Daily Deals'),
+            buildMenuItemForm('Big Offers'),
           ],
         ),
       ),

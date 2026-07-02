@@ -8,6 +8,8 @@ import 'package:apptest/pages/navbar_pages/order.dart';
 import 'package:apptest/pages/navbar_pages/profile.dart';
 
 class NavbarScreen extends StatefulWidget {
+  const NavbarScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -264,7 +266,7 @@ class CategoryButton extends StatelessWidget {
   final IconData icon;
   final String label;
 
-  CategoryButton({required this.icon, required this.label});
+  const CategoryButton({super.key, required this.icon, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -295,7 +297,7 @@ class DealCard extends StatelessWidget {
   final String tag;
   final String productName;
 
-  const DealCard({
+  const DealCard({super.key, 
     required this.title,
     required this.pieces,
     required this.time,

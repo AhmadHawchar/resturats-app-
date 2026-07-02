@@ -9,6 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 class HomePage extends StatelessWidget {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+   HomePage({super.key});
+
   // Utility function to convert Timestamp to formatted date string
   String formatOfferExpirationDate(dynamic expirationDate) {
     if (expirationDate == null) return 'No Expiry';
@@ -378,7 +380,7 @@ class HomePage extends StatelessWidget {
         // Take only the top 3 items
         final topItems = sortedDocs.take(3).toList();
 
-        return Container(
+        return SizedBox(
           height: 250,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -440,11 +442,11 @@ class CategoryButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   const CategoryButton({
-    Key? key,
+    super.key,
     required this.icon,
     required this.label,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -514,7 +516,7 @@ class FeatureItemCard extends StatelessWidget {
   final String itemId;
   final Map<String, dynamic> foodItem;
 
-  FeatureItemCard({
+  const FeatureItemCard({super.key, 
     required this.title,
     required this.description,
     required this.price,
@@ -599,7 +601,7 @@ class RecommendedItemCard extends StatelessWidget {
   final int dealQuantity;
 
   const RecommendedItemCard({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
     required this.description,
@@ -608,7 +610,7 @@ class RecommendedItemCard extends StatelessWidget {
     required this.foodItem,
     required this.restaurantId,
     required this.dealQuantity,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -752,7 +754,7 @@ class BigOfferItemCard extends StatelessWidget {
   final int dealQuantity;
 
   const BigOfferItemCard({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
     required this.description,
@@ -762,7 +764,7 @@ class BigOfferItemCard extends StatelessWidget {
     required this.foodItem,
     required this.restaurantId,
     required this.dealQuantity,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 class ClientLoginPage extends StatefulWidget {
-  const ClientLoginPage({Key? key}) : super(key: key);
+  const ClientLoginPage({super.key});
 
   @override
   _ClientLoginPageState createState() => _ClientLoginPageState();

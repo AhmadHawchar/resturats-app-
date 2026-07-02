@@ -8,10 +8,10 @@ class FoodInfoPage extends StatefulWidget {
   final String restaurantId;
 
   const FoodInfoPage({
-    Key? key,
+    super.key,
     required this.foodItem,
     required this.restaurantId,
-  }) : super(key: key);
+  });
 
   @override
   _FoodInfoPageState createState() => _FoodInfoPageState();
@@ -24,12 +24,10 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
 
   String? _whatsappNumber;
   bool _isOrdered = false;
-  bool _isLoading = false;
   String? _errorMessage;
   int _quantity = 1;
   late int _maxQuantity;
   List<String> _selectedMaterials = [];
-  String? _instructions;
 
   @override
   void initState() {
@@ -58,9 +56,9 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
           await _firestore.collection('restaurants').get();
 
       print('Total restaurants found: ${restaurantQuery.docs.length}');
-      restaurantQuery.docs.forEach((doc) {
+      for (var doc in restaurantQuery.docs) {
         print('Found Restaurant ID: ${doc.id}');
-      });
+      }
 
       final restaurantDoc = await _firestore
           .collection('restaurants')
@@ -111,7 +109,6 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
       if (data != null) {
         setState(() {
           _selectedMaterials = List<String>.from(data['materials'] ?? []);
-          _instructions = data['instructions'] ?? '';
           // Prioritize Firestore data, fallback to widget foodItem
           _maxQuantity =
               data['maxQuantity'] ?? widget.foodItem['quantity'] ?? 10;
@@ -179,10 +176,6 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
   }
 
   Future<void> _submitOrder() async {
-    setState(() {
-      _isLoading = true;
-    });
-
     try {
       final User? currentUser = _auth.currentUser;
       if (currentUser == null) {
@@ -270,7 +263,6 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
       // Update UI
       setState(() {
         _isOrdered = true;
-        _isLoading = false;
       });
 
       // Show success message
@@ -279,71 +271,7 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
       print('Unexpected error in order submission: $e');
       print('Stack trace: $stackTrace');
       _showErrorSnackBar('An unexpected error occurred');
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
     }
-  }
-
-  Widget _buildQuantitySelector() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(
-          icon: Icon(Icons.remove_circle_outline),
-          onPressed: _decrementQuantity,
-        ),
-        Text(
-          '$_quantity / $_maxQuantity',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        IconButton(
-          icon: Icon(Icons.add_circle_outline),
-          onPressed: _incrementQuantity,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildMaterialsSelector() {
-    return _selectedMaterials.isNotEmpty
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Materials:',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Wrap(
-                spacing: 8.0,
-                children: _selectedMaterials.map((material) {
-                  return Chip(
-                    label: Text(material),
-                  );
-                }).toList(),
-              ),
-            ],
-          )
-        : SizedBox.shrink();
-  }
-
-  Widget _buildInstructionsSection() {
-    return _instructions != null && _instructions!.isNotEmpty
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Instructions:',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                _instructions!,
-                style: TextStyle(color: Colors.grey[700]),
-              ),
-            ],
-          )
-        : SizedBox.shrink();
   }
 
   @override
@@ -434,15 +362,13 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
                   Positioned(
                     bottom: -30,
                     left: 0,
-                    child: Container(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.network(
-                          widget.foodItem['imageUrl'] ?? '',
-                          height: 200,
-                          width: 200,
-                          fit: BoxFit.contain,
-                        ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.network(
+                        widget.foodItem['imageUrl'] ?? '',
+                        height: 200,
+                        width: 200,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
@@ -604,7 +530,7 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${_quantity} Items',
+                        '$_quantity Items',
                         style: TextStyle(
                           color: Colors.grey[600],
                           fontSize: 16,
@@ -639,13 +565,13 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
                           )
                         : ElevatedButton(
                             onPressed: _placeOrder,
-                            child: Text('Order Now'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Color(0xFFD75A88),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(25),
                               ),
                             ),
+                            child: Text('Order Now'),
                           ),
                   ),
                 ],

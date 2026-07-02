@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 class OwnerLoginPage extends StatefulWidget {
-  const OwnerLoginPage({Key? key}) : super(key: key);
+  const OwnerLoginPage({super.key});
 
   @override
   _OwnerLoginPageState createState() => _OwnerLoginPageState();

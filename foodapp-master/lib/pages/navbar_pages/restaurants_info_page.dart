@@ -7,8 +7,7 @@ import 'package:apptest/pages/food_info.dart';
 class RestaurantInfoPage extends StatefulWidget {
   final String restaurantId;
 
-  const RestaurantInfoPage({Key? key, required this.restaurantId})
-      : super(key: key);
+  const RestaurantInfoPage({super.key, required this.restaurantId});
 
   @override
   _RestaurantInfoPageState createState() => _RestaurantInfoPageState();

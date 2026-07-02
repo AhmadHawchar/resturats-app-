@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 class RestaurantLoginPage extends StatefulWidget {
-  const RestaurantLoginPage({Key? key}) : super(key: key);
+  const RestaurantLoginPage({super.key});
 
   @override
   _RestaurantLoginPageState createState() => _RestaurantLoginPageState();

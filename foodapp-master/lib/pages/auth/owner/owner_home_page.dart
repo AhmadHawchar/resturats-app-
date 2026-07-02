@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class OwnerHomePage extends StatefulWidget {
-  const OwnerHomePage({Key? key}) : super(key: key);
+  const OwnerHomePage({super.key});
 
   @override
   _OwnerHomePageState createState() => _OwnerHomePageState();
@@ -18,7 +17,6 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
   // Color Palette
   final Color _primaryColor = const Color(0xFFD75A88);
   final Color _backgroundColor = const Color(0xFFF3E5F5);
-  final Color _cardColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {

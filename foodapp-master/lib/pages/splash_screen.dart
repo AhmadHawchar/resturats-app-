@@ -3,7 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:apptest/pages/auth/ask_user.dart'; // Adjust this import as needed
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   _SplashScreenState createState() => _SplashScreenState();

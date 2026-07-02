@@ -8,7 +8,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:shimmer/shimmer.dart';
 
 class RestaurantSignupPage extends StatefulWidget {
-  const RestaurantSignupPage({Key? key}) : super(key: key);
+  const RestaurantSignupPage({super.key});
 
   @override
   _RestaurantSignupPageState createState() => _RestaurantSignupPageState();

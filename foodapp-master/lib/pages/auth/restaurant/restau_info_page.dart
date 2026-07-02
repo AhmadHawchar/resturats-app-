@@ -8,10 +8,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 
 class RestaurantInfoPage extends StatefulWidget {
-  const RestaurantInfoPage({Key? key}) : super(key: key);
+  const RestaurantInfoPage({super.key});
 
   @override
   _RestaurantInfoPageState createState() => _RestaurantInfoPageState();
@@ -22,7 +21,7 @@ class _RestaurantInfoPageState extends State<RestaurantInfoPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  static const String _IMGBB_API_KEY = 'd97d7227eca3b349cbf52ad09b50bafd';
+  static const String _imgbbApiKey = 'd97d7227eca3b349cbf52ad09b50bafd';
 
   File? _imageFile;
   String? _imageUrl;
@@ -59,7 +58,7 @@ class _RestaurantInfoPageState extends State<RestaurantInfoPage> {
       var request = http.MultipartRequest(
           'POST', Uri.parse('https://api.imgbb.com/1/upload'));
 
-      request.fields['key'] = _IMGBB_API_KEY;
+      request.fields['key'] = _imgbbApiKey;
       request.files
           .add(await http.MultipartFile.fromPath('image', _imageFile!.path));
 
@@ -83,55 +82,6 @@ class _RestaurantInfoPageState extends State<RestaurantInfoPage> {
       });
       _showErrorDialog('Error uploading image');
       return null;
-    }
-  }
-
-  Future<void> _getCurrentLocation() async {
-    try {
-      setState(() {
-        _isLoading = true;
-      });
-
-      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-      if (!serviceEnabled) {
-        _showErrorDialog('Location services are disabled');
-        return;
-      }
-
-      LocationPermission permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
-          _showErrorDialog('Location permissions are denied');
-          return;
-        }
-      }
-
-      if (permission == LocationPermission.deniedForever) {
-        _showErrorDialog('Location permissions are permanently denied');
-        return;
-      }
-
-      final position = await Geolocator.getCurrentPosition();
-      setState(() {
-        _selectedLocation = position;
-        _isLoading = false;
-      });
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Location Selected Successfully!',
-            style: GoogleFonts.poppins(color: Colors.white),
-          ),
-          backgroundColor: _primaryColor,
-        ),
-      );
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
-      _showErrorDialog('Error getting location');
     }
   }
 

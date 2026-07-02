@@ -6,7 +6,7 @@ import 'package:apptest/pages/auth/restaurant/restaurant_login.dart';
 import 'package:apptest/pages/auth/client/client_login.dart';
 
 class AskUserPage extends StatelessWidget {
-  const AskUserPage({Key? key}) : super(key: key);
+  const AskUserPage({super.key});
 
   @override
   Widget build(BuildContext context) {

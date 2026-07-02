@@ -4,14 +4,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:apptest/pages/navbar_pages/order.dart';
-import 'package:apptest/pages/auth/client/client_login.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../auth/client/client_info.dart';
 
 class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -49,116 +49,9 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  void _showAddressUpdateDialog() {
-    final _addressController = TextEditingController(
-      text: _userData?['location']?['name'] ?? '',
-    );
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          'Update Location',
-          style: GoogleFonts.poppins(),
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: _addressController,
-              decoration: InputDecoration(
-                labelText: 'Location Name',
-                border: OutlineInputBorder(),
-              ),
-              maxLines: 2,
-            ),
-            SizedBox(height: 16),
-            SizedBox(
-              height: 250,
-              child: FlutterMap(
-                options: MapOptions(
-                  initialCenter: LatLng(
-                    double.parse(_userData?['location']['latitude']),
-                    double.parse(_userData?['location']['longitude']),
-                  ),
-                  initialZoom: 15.0,
-                  onTap: (tapPosition, point) {
-                    // Update location when map is tapped
-                    _updateLocationFromMapTap(point);
-                  },
-                ),
-                children: [
-                  TileLayer(
-                    urlTemplate:
-                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    userAgentPackageName: 'com.example.app',
-                  ),
-                  MarkerLayer(
-                    markers: [
-                      Marker(
-                        point: LatLng(
-                          double.parse(_userData?['location']['latitude']),
-                          double.parse(_userData?['location']['longitude']),
-                        ),
-                        width: 80,
-                        height: 80,
-                        child: Icon(
-                          Icons.location_pin,
-                          color: Colors.red,
-                          size: 50,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              try {
-                await _firestore
-                    .collection('users')
-                    .doc(_auth.currentUser!.uid)
-                    .update({
-                  'location.name': _addressController.text.trim(),
-                });
-
-                // Refresh user data
-                await _fetchUserData();
-
-                Navigator.of(context).pop();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Location updated successfully'),
-                    backgroundColor: Colors.green,
-                  ),
-                );
-              } catch (e) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Error updating location: $e'),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              }
-            },
-            child: Text('Save'),
-          ),
-        ],
-      ),
-    );
-  }
-
   void _showPaymentMethodDialog() {
     final paymentMethods = ['Cash', 'Visa', 'PayPal'];
-    String? _selectedPaymentMethod = _userData?['paymentMethod'];
+    String? selectedPaymentMethod = _userData?['paymentMethod'];
 
     showDialog(
       context: context,
@@ -174,10 +67,10 @@ class _ProfilePageState extends State<ProfilePage> {
               return RadioListTile<String>(
                 title: Text(method),
                 value: method,
-                groupValue: _selectedPaymentMethod,
+                groupValue: selectedPaymentMethod,
                 onChanged: (value) {
                   setState(() {
-                    _selectedPaymentMethod = value;
+                    selectedPaymentMethod = value;
                   });
                 },
               );
@@ -190,13 +83,13 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             ElevatedButton(
               onPressed: () async {
-                if (_selectedPaymentMethod != null) {
+                if (selectedPaymentMethod != null) {
                   try {
                     await _firestore
                         .collection('users')
                         .doc(_auth.currentUser!.uid)
                         .update({
-                      'paymentMethod': _selectedPaymentMethod,
+                      'paymentMethod': selectedPaymentMethod,
                     });
 
                     // Refresh user data
@@ -223,83 +116,6 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  void _showLocationDetailsDialog() {
-    // Check if location data exists and is complete
-    if (_userData == null ||
-        _userData?['location'] == null ||
-        _userData?['location']['latitude'] == null ||
-        _userData?['location']['longitude'] == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Location details not available')),
-      );
-      return;
-    }
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          'Your Location',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Map View
-            SizedBox(
-              height: 250,
-              child: FlutterMap(
-                options: MapOptions(
-                  initialCenter: LatLng(
-                    double.parse(_userData?['location']['latitude']),
-                    double.parse(_userData?['location']['longitude']),
-                  ),
-                  initialZoom: 15.0,
-                ),
-                children: [
-                  TileLayer(
-                    urlTemplate:
-                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    userAgentPackageName: 'com.example.app',
-                  ),
-                  MarkerLayer(
-                    markers: [
-                      Marker(
-                        point: LatLng(
-                          double.parse(_userData?['location']['latitude']),
-                          double.parse(_userData?['location']['longitude']),
-                        ),
-                        width: 80,
-                        height: 80,
-                        child: Icon(
-                          Icons.location_pin,
-                          color: Colors.red,
-                          size: 50,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 16),
-            // Location Details
-            Text(
-              'Location Name: ${_userData?['location']['name'] ?? 'N/A'}',
-              style: GoogleFonts.poppins(),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text('Close'),
-          ),
-        ],
       ),
     );
   }
@@ -364,37 +180,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Future<void> _updateLocationFromMapTap(LatLng point) async {
-    try {
-      // Use geocoding to get location name from coordinates
-      // You'll need to import and implement geocoding
-      // For now, we'll use a placeholder
-      await _firestore.collection('users').doc(_auth.currentUser!.uid).update({
-        'location.latitude': point.latitude.toString(),
-        'location.longitude': point.longitude.toString(),
-        // Optionally add reverse geocoding here
-        // 'location.name': await getReverseGeocoding(point)
-      });
-
-      // Refresh user data
-      await _fetchUserData();
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Location updated successfully'),
-          backgroundColor: Colors.green,
-        ),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error updating location: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
-
   void _signOut() async {
     try {
       await _auth.signOut();
@@ -413,9 +198,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       body: _isLoading
           ? Center(

@@ -7,8 +7,7 @@ import 'package:apptest/pages/food_info.dart';
 class CategoryInfoPage extends StatefulWidget {
   final String categoryName;
 
-  const CategoryInfoPage({Key? key, required this.categoryName})
-      : super(key: key);
+  const CategoryInfoPage({super.key, required this.categoryName});
 
   @override
   _CategoryInfoPageState createState() => _CategoryInfoPageState();
@@ -58,26 +57,6 @@ class _CategoryInfoPageState extends State<CategoryInfoPage> {
       setState(() {
         _isLoading = false;
       });
-    }
-  }
-
-  // Helper method to normalize category names
-  String _normalizeCategoryName(String category) {
-    switch (category.toLowerCase()) {
-      case 'meat':
-        return 'meat';
-      case 'drinks':
-        return 'drinks';
-      case 'salads':
-        return 'salad';
-      case 'sweets':
-        return 'dessert';
-      case 'plates':
-        return 'main course';
-      case 'sandwiches':
-        return 'sandwich';
-      default:
-        return category.toLowerCase();
     }
   }
 
