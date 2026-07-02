@@ -297,7 +297,8 @@ class DealCard extends StatelessWidget {
   final String tag;
   final String productName;
 
-  const DealCard({super.key, 
+  const DealCard({
+    super.key,
     required this.title,
     required this.pieces,
     required this.time,

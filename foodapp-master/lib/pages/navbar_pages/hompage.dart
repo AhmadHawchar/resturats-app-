@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 class HomePage extends StatelessWidget {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-   HomePage({super.key});
+  HomePage({super.key});
 
   // Utility function to convert Timestamp to formatted date string
   String formatOfferExpirationDate(dynamic expirationDate) {
@@ -516,7 +516,8 @@ class FeatureItemCard extends StatelessWidget {
   final String itemId;
   final Map<String, dynamic> foodItem;
 
-  const FeatureItemCard({super.key, 
+  const FeatureItemCard({
+    super.key,
     required this.title,
     required this.description,
     required this.price,

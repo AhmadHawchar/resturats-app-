@@ -279,7 +279,8 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
                     onPrimary: Colors.white,
                     surface: Colors.white,
                     onSurface: _primaryColor,
-                  ), dialogTheme: DialogThemeData(backgroundColor: Colors.white),
+                  ),
+                  dialogTheme: DialogThemeData(backgroundColor: Colors.white),
                 ),
                 child: child!,
               ),
@@ -428,7 +429,8 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: _primaryColor.withValues(alpha: 0.5)),
+              borderSide:
+                  BorderSide(color: _primaryColor.withValues(alpha: 0.5)),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),

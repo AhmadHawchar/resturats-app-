@@ -8,7 +8,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:shimmer/shimmer.dart';
 
-
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
