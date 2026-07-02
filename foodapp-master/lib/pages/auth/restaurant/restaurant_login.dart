@@ -10,7 +10,7 @@ class RestaurantLoginPage extends StatefulWidget {
   const RestaurantLoginPage({super.key});
 
   @override
-  _RestaurantLoginPageState createState() => _RestaurantLoginPageState();
+  State<RestaurantLoginPage> createState() => _RestaurantLoginPageState();
 }
 
 class _RestaurantLoginPageState extends State<RestaurantLoginPage> {

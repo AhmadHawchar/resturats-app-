@@ -10,7 +10,7 @@ class CategoryInfoPage extends StatefulWidget {
   const CategoryInfoPage({super.key, required this.categoryName});
 
   @override
-  _CategoryInfoPageState createState() => _CategoryInfoPageState();
+  State<CategoryInfoPage> createState() => _CategoryInfoPageState();
 }
 
 class _CategoryInfoPageState extends State<CategoryInfoPage> {

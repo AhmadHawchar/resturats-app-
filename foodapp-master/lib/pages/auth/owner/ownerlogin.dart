@@ -9,7 +9,7 @@ class OwnerLoginPage extends StatefulWidget {
   const OwnerLoginPage({super.key});
 
   @override
-  _OwnerLoginPageState createState() => _OwnerLoginPageState();
+  State<OwnerLoginPage> createState() => _OwnerLoginPageState();
 }
 
 class _OwnerLoginPageState extends State<OwnerLoginPage> {

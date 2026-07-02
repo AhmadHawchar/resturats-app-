@@ -10,7 +10,7 @@ class ClientLoginPage extends StatefulWidget {
   const ClientLoginPage({super.key});
 
   @override
-  _ClientLoginPageState createState() => _ClientLoginPageState();
+  State<ClientLoginPage> createState() => _ClientLoginPageState();
 }
 
 class _ClientLoginPageState extends State<ClientLoginPage> {

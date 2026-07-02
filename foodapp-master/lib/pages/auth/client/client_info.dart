@@ -17,7 +17,7 @@ class ClientInfoPage extends StatefulWidget {
   const ClientInfoPage({super.key});
 
   @override
-  _ClientInfoPageState createState() => _ClientInfoPageState();
+  State<ClientInfoPage> createState() => _ClientInfoPageState();
 }
 
 class _ClientInfoPageState extends State<ClientInfoPage> {
@@ -363,7 +363,7 @@ class LocationPickerPage extends StatefulWidget {
   const LocationPickerPage({super.key});
 
   @override
-  _LocationPickerPageState createState() => _LocationPickerPageState();
+  State<LocationPickerPage> createState() => _LocationPickerPageState();
 }
 
 class _LocationPickerPageState extends State<LocationPickerPage> {
@@ -646,7 +646,7 @@ class _LocationPickerPageState extends State<LocationPickerPage> {
             Container(
               width: double.infinity,
               padding: EdgeInsets.all(16),
-              color: Theme.of(context).primaryColor.withOpacity(0.1),
+              color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

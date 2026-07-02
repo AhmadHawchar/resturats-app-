@@ -11,7 +11,7 @@ class RestaurantSignupPage extends StatefulWidget {
   const RestaurantSignupPage({super.key});
 
   @override
-  _RestaurantSignupPageState createState() => _RestaurantSignupPageState();
+  State<RestaurantSignupPage> createState() => _RestaurantSignupPageState();
 }
 
 class _RestaurantSignupPageState extends State<RestaurantSignupPage>

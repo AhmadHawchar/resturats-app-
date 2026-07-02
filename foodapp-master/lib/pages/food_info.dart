@@ -14,7 +14,7 @@ class FoodInfoPage extends StatefulWidget {
   });
 
   @override
-  _FoodInfoPageState createState() => _FoodInfoPageState();
+  State<FoodInfoPage> createState() => _FoodInfoPageState();
 }
 
 class _FoodInfoPageState extends State<FoodInfoPage> {
@@ -342,7 +342,7 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
                           padding:
                               EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.3),
+                            color: Colors.white.withValues(alpha: 0.3),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Row(
@@ -591,12 +591,12 @@ class _FoodInfoPageState extends State<FoodInfoPage> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.3),
+        color: color.withValues(alpha: 0.3),
         borderRadius: BorderRadius.circular(15),
       ),
       child: Row(
         children: [
-          Icon(icon, size: 20, color: color.withOpacity(0.8)),
+          Icon(icon, size: 20, color: color.withValues(alpha: 0.8)),
           SizedBox(width: 8),
           Text(label, style: TextStyle(fontSize: 14)),
         ],

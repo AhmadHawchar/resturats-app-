@@ -11,7 +11,7 @@ class NavbarScreen extends StatefulWidget {
   const NavbarScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<NavbarScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<NavbarScreen> {
@@ -275,7 +275,7 @@ class CategoryButton extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.blue.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(icon, size: 30, color: Colors.blue),

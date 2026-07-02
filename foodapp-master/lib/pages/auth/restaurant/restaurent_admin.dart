@@ -15,7 +15,7 @@ class RestaurantAdminPage extends StatefulWidget {
   const RestaurantAdminPage({super.key});
 
   @override
-  _RestaurantAdminPageState createState() => _RestaurantAdminPageState();
+  State<RestaurantAdminPage> createState() => _RestaurantAdminPageState();
 }
 
 class _RestaurantAdminPageState extends State<RestaurantAdminPage>
@@ -426,7 +426,7 @@ class _RestaurantAdminPageState extends State<RestaurantAdminPage>
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: _primaryColor.withOpacity(0.5)),
+              borderSide: BorderSide(color: _primaryColor.withValues(alpha: 0.5)),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),

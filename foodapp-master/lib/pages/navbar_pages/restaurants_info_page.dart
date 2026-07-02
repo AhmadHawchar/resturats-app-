@@ -10,7 +10,7 @@ class RestaurantInfoPage extends StatefulWidget {
   const RestaurantInfoPage({super.key, required this.restaurantId});
 
   @override
-  _RestaurantInfoPageState createState() => _RestaurantInfoPageState();
+  State<RestaurantInfoPage> createState() => _RestaurantInfoPageState();
 }
 
 class _RestaurantInfoPageState extends State<RestaurantInfoPage>

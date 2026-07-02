@@ -8,7 +8,7 @@ class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
 
   @override
-  _OrderPageState createState() => _OrderPageState();
+  State<OrderPage> createState() => _OrderPageState();
 }
 
 class _OrderPageState extends State<OrderPage> {

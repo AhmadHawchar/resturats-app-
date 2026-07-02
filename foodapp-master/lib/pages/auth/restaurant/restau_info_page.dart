@@ -13,7 +13,7 @@ class RestaurantInfoPage extends StatefulWidget {
   const RestaurantInfoPage({super.key});
 
   @override
-  _RestaurantInfoPageState createState() => _RestaurantInfoPageState();
+  State<RestaurantInfoPage> createState() => _RestaurantInfoPageState();
 }
 
 class _RestaurantInfoPageState extends State<RestaurantInfoPage> {
@@ -340,7 +340,7 @@ class _RestaurantInfoPageState extends State<RestaurantInfoPage> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: _primaryColor.withOpacity(0.5)),
+          borderSide: BorderSide(color: _primaryColor.withValues(alpha: 0.5)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

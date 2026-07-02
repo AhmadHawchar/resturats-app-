@@ -7,7 +7,7 @@ class OwnerHomePage extends StatefulWidget {
   const OwnerHomePage({super.key});
 
   @override
-  _OwnerHomePageState createState() => _OwnerHomePageState();
+  State<OwnerHomePage> createState() => _OwnerHomePageState();
 }
 
 class _OwnerHomePageState extends State<OwnerHomePage> {
